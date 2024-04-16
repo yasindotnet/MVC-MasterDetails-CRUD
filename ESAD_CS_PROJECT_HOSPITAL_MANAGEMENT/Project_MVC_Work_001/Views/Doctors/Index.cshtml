@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Project_MVC_Work_001.Models.Doctor>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="display-4">Doctor List</h2>
+<div class="d-flex justify-content-between">
+    <a href="@Url.Action("Create","Doctors")" class="btn btn-success btn-sm mb-2"><i class="fa fa-plus-circle"></i> Add New Doctor</a>
+</div>
+
+<table class="table table-bordered table-striped table-info table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DoctorName)
+        </th>
+        <th>Action</th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DoctorName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DoctorId }, new {@class="btn btn-success btn-sm"})
+            @Html.ActionLink("Delete", "Delete", new { id=item.DoctorId }, new {@class="btn btn-danger btn-sm"})
+        </td>
+    </tr>
+}
+
+</table>

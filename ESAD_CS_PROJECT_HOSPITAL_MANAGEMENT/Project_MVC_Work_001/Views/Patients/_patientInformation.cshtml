@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Project_MVC_Work_001.Models.Patient>
+@using PagedList
+@using PagedList.Mvc
+
+<table class="table table-bordered table-striped table-sm">
+    <thead class="table-primary">
+        <tr>
+            <th>Show Details</th>
+            <th>Picture</th>
+            <th>Patient Name</th>
+            <th>Age</th>
+            <th>Admission Date</th>
+            <th>Doctor</th>
+            <th>Department</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="width:40px;text-align:center">
+                    <button type="button" class="btn btn-sm show">Show</button>
+                    <button type="button" class="btn btn-sm hide" style="display:none">Hide</button>
+                </td>
+                <td style="width:50px; text-align:center">
+                    <img src="~/Images/@item.Picture" class="rounded-circle" style="width:32px" />
+                </td>
+                <td>@item.PatientName</td>
+                <td>@item.Age</td>
+                <td>@item.AdmissioneDate.ToString("yyyy-MM-dd")</td>
+                <td>@item.Doctor.DoctorName</td>
+                <td>@item.Department.DepartmentName</td>
+                <td>
+                    <a href="@Url.Action("Edit", "Patients", new { id = item.PatientId })" class="btn btn-success"><i class="fa fa-pencil"></i></a>
+                    <a href="@Url.Action("Delete", "Patients", new { id = item.PatientId })" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+            <tr style="display:none">
+                <td></td>
+                <td colspan="6">
+                    <h2 class="display-4">PatientDetails</h2>
+                    <table class="table table-bordered table-sm table-striped">
+                        <thead class="table-info">
+                            <tr>
+                                <th>Test</th>
+                                <th>Description</th>
+                                <th>Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var pd in item.PatientDetails)
+                            {
+                                <tr>
+                                    <td>@pd.Test</td>
+                                    <td>@pd.Description</td>
+                                    <td>@pd.Cost</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        }
+    </tbody>   
+</table>

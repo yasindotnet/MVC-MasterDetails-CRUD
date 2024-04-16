@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="display-4">Patient List</h2>
+<div class="row">
+    <div class="col">
+        <div class="d-flex justify-content-end">
+            <a href="@Url.Action("Create","Patients")" class="btn btn-outline-primary btn-sm"><i class="fa fa-plus-circle"></i> Add New Patient</a>
+        </div>
+        <div id="table">
+            @Html.Action("patientInformation")
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="~/Scripts/jquery-3.7.1.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+    <script>
+        $(document).on("click", "button.show", function () {
+            var showbtn = $(this);
+            var hidebtn = showbtn.next();
+            var trsh = showbtn.closest("tr");
+            var trst = trsh.next();
+            showbtn.hide();
+            hidebtn.show();
+            trst.show();
+        });
+        $(document).on("click", "button.hide", function () {
+            var hidebtn = $(this);
+            var showbtn = hidebtn.prev();
+            var trsh = showbtn.closest("tr");
+            var trst = trsh.next();
+            showbtn.show();
+            hidebtn.hide();
+            trst.hide();
+        });
+    </script>
+}
+
+

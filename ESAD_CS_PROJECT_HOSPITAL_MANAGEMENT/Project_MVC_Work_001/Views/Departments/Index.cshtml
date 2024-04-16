@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Project_MVC_Work_001.Models.Department>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="display-4">Department List</h2>
+
+<div class="d-flex justify-content-between">
+    <a href="@Url.Action("Create","Departments")" class="btn btn-success btn-sm mb-2"><i class="fa fa-plus-circle"></i> Add New Department</a>
+</div>
+<table class="table table-bordered table-striped table-sm">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DepartmentName)
+        </th>
+        <th>Action</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DepartmentName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.DepartmentId }, new { @class = "btn btn-success btn-sm" })
+            @Html.ActionLink("Delete", "Delete", new { id = item.DepartmentId }, new { @class = "btn btn-danger btn-sm" })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Project_MVC_Work_001.Models.Patient>
+    
+<table class="table table-bordered table-striped table-sm">
+    <thead class="table-info">
+        <tr>
+            <th>@Html.DisplayNameFor(x => x.PatientName)</th>
+            <th>@Html.DisplayNameFor(x => x.Age)</th>
+            <th>@Html.DisplayNameFor(x => x.AdmissioneDate)</th>
+            <th>@Html.DisplayNameFor(x => x.MaritialStatus)</th>
+            <th>@Html.DisplayNameFor(x => x.Picture)</th>
+        </tr>
+    </thead>
+    <tbody >
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(x => item.PatientName)</td>
+                <td>@Html.DisplayFor(x => item.Age)</td>
+                <td>@Html.DisplayFor(x => item.AdmissioneDate)</td>
+                <td>@Html.DisplayFor(x => item.MaritialStatus)</td>
+                <td>@Html.DisplayFor(x => item.Picture)</td>
+            </tr>
+        }
+    </tbody>
+</table>

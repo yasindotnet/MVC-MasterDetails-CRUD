@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HospitalManagementDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="PatientDetail">
+    <Key>
+      <PropertyRef Name="PatientDetailsId" />
+    </Key>
+    <Property Name="PatientDetailsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Test" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Cost" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="PatientId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Patient" Relationship="Self.FK_dbo_PatientDetails_dbo_Patients_PatientId" FromRole="PatientDetails" ToRole="Patients" />
+  </EntityType>
+  <EntityType Name="Patient">
+    <Key>
+      <PropertyRef Name="PatientId" />
+    </Key>
+    <Property Name="PatientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PatientName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AdmissioneDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Age" Type="Int32" Nullable="false" />
+    <Property Name="MaritialStatus" Type="Boolean" Nullable="false" />
+    <Property Name="Picture" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DoctorId" Type="Int32" Nullable="false" />
+    <Property Name="DepatmentId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PatientDetails" Relationship="Self.FK_dbo_PatientDetails_dbo_Patients_PatientId" FromRole="Patients" ToRole="PatientDetails" />
+  </EntityType>
+  <Association Name="FK_dbo_PatientDetails_dbo_Patients_PatientId">
+    <End Role="Patients" Type="Self.Patient" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PatientDetails" Type="Self.PatientDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patients">
+        <PropertyRef Name="PatientId" />
+      </Principal>
+      <Dependent Role="PatientDetails">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="HospitalManagementDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="PatientDetails" EntityType="Self.PatientDetail" />
+    <EntitySet Name="Patients" EntityType="Self.Patient" />
+    <AssociationSet Name="FK_dbo_PatientDetails_dbo_Patients_PatientId" Association="Self.FK_dbo_PatientDetails_dbo_Patients_PatientId">
+      <End Role="Patients" EntitySet="Patients" />
+      <End Role="PatientDetails" EntitySet="PatientDetails" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
